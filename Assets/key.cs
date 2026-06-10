@@ -5,7 +5,7 @@ public class Key : MonoBehaviour
     public string Name; 
     public KeyHolder playerObject; 
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == playerObject.gameObject)
         {

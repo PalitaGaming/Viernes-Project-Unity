@@ -18,17 +18,29 @@ public class KeyHolder : MonoBehaviour
         numberOfKeysLeft = maxKeys - keysHolding.Count;
         return toReturn;
     }
-
     public void AddKey(Key key)
     {
         keysHolding.Add(key);
 
         if (currentNotification != null)
-            StopCoroutine(currentNotification);
+            return;
 
         currentNotification = StartCoroutine(
             ShowText($"You picked up {key.Name}", 3f)
         );
+    }
+
+    public void CheckDoor()
+    {
+        if (currentNotification != null)
+            return;
+
+        if (!HasAllKeys(out int numberOfKeysLeft))
+        {
+            currentNotification = StartCoroutine(
+                ShowText($"You need to find {numberOfKeysLeft} more keys", 3f)
+            );
+        }
     }
 
     IEnumerator ShowText(string message, float duration)
@@ -39,5 +51,7 @@ public class KeyHolder : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         notificationText.gameObject.SetActive(false);
+
+        currentNotification = null;
     }
 }
