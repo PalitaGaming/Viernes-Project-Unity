@@ -11,6 +11,7 @@ public class KeyHolder : MonoBehaviour
     public TMP_Text notificationText;
 
     Coroutine currentNotification;
+    public float notificationTime = 2.2f;
 
     public bool HasAllKeys(out int numberOfKeysLeft)
     {
@@ -26,7 +27,7 @@ public class KeyHolder : MonoBehaviour
             return;
 
         currentNotification = StartCoroutine(
-            ShowText($"You picked up {key.Name}", 3f)
+            ShowText($"You picked up {key.Name}", notificationTime)
         );
     }
 
@@ -38,7 +39,7 @@ public class KeyHolder : MonoBehaviour
         if (!HasAllKeys(out int numberOfKeysLeft))
         {
             currentNotification = StartCoroutine(
-                ShowText($"You need to find {numberOfKeysLeft} more keys", 3f)
+                ShowText($"You need to find {numberOfKeysLeft} more keys", notificationTime)
             );
         }
         else
