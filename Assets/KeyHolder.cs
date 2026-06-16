@@ -51,6 +51,13 @@ public class KeyHolder : MonoBehaviour
         }
     }
 
+    public void FinishTouched()
+    {
+        currentNotification = StartCoroutine(
+                ShowText($"Reached the end!", 3f)
+            );
+    }
+
     IEnumerator ShowText(string message, float duration)
     {
         notificationText.gameObject.SetActive(true);
